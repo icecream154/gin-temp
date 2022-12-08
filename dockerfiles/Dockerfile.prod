@@ -1,0 +1,36 @@
+# syntax=docker/dockerfile:1
+
+##
+## Build
+##
+FROM golang:1.19-alpine AS build
+
+ENV CGO_ENABLED 0
+ENV GOPROXY https://goproxy.cn,direct
+
+WORKDIR /app
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY . ./
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o /server ./cmd/web/main.go
+
+##
+## Deploy
+##
+FROM alpine:latest
+
+WORKDIR /
+
+RUN apk update && apk add tzdata \
+&& cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+&& echo "Shanghai/Asia" > /etc/timezone \
+&& apk del tzdata
+
+COPY --from=build /server /server
+COPY . ./
+
+ENV APP_ENV=prod_docker
+ENTRYPOINT ["/server"]
