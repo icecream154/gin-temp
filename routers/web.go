@@ -49,6 +49,11 @@ func InitWebRouter() *gin.Engine {
 				sysNoAuth.POST("/register", validatorFactory.Create("AccountRegister"))
 			}
 
+			qaNoAuth := backend.Group("/qa")
+			{
+				qaNoAuth.POST("/submitInput", validatorFactory.Create("QASubmitInput"))
+			}
+
 			//backend.Use(authorization.CheckTokenAuth())
 			//{
 			//	// 通用接口

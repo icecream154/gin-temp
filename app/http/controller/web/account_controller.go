@@ -50,7 +50,7 @@ func (u *AccountController) Register(context *gin.Context) {
 		return
 	}
 
-	if account.Id == 0 {
+	if account.Id != 0 {
 		zLogger.Info(err, "账号已注册, account=[%v]", account)
 		response.Success(context, consts.CurdRegisterFailCode, "账号已注册", "")
 		return

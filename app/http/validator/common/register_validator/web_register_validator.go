@@ -13,4 +13,5 @@ func WebRegisterValidator() {
 	containers.Set("AccountLogin", common.LoginValidator{})
 	containers.Set("AccountRegister", common.RegisterValidator{})
 
+	containers.Set("QASubmitInput", common.SubmitInputValidator{})
 }
