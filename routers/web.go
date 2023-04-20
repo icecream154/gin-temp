@@ -4,7 +4,6 @@ import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"goskeleton/app/global/variable"
-	"goskeleton/app/http/middleware/authorization"
 	"goskeleton/app/http/middleware/cors"
 	"goskeleton/app/http/middleware/request_context"
 	validatorFactory "goskeleton/app/http/validator/core/factory"
@@ -40,28 +39,28 @@ func InitWebRouter() *gin.Engine {
 	}
 
 	//  创建一个后端接口路由组
-	backend := router.Group("/sys")
+	backend := router.Group("/yi")
 	{
 		backend.Use(request_context.CheckRequestContext())
 		{
 			sysNoAuth := backend.Group("/common")
 			{
-				sysNoAuth.POST("/sendCode", validatorFactory.Create("SysSendCode"))
-				sysNoAuth.POST("/validateCode", validatorFactory.Create("SysValidateCode"))
+				sysNoAuth.POST("/login", validatorFactory.Create("AccountLogin"))
+				sysNoAuth.POST("/register", validatorFactory.Create("AccountRegister"))
 			}
 
-			backend.Use(authorization.CheckTokenAuth())
-			{
-				// 通用接口
-				commonAuth := backend.Group("/common")
-				{
-					opinionAuth := commonAuth.Group("/opinion")
-					{
-						opinionAuth.POST("/submitOpinion", validatorFactory.Create("SysSubmitOpinion"))
-						opinionAuth.GET("/queryOpinion", validatorFactory.Create("SysQueryOpinion"))
-					}
-				}
-			}
+			//backend.Use(authorization.CheckTokenAuth())
+			//{
+			//	// 通用接口
+			//	commonAuth := backend.Group("/common")
+			//	{
+			//		opinionAuth := commonAuth.Group("/opinion")
+			//		{
+			//			opinionAuth.POST("/submitOpinion", validatorFactory.Create("SysSubmitOpinion"))
+			//			opinionAuth.GET("/queryOpinion", validatorFactory.Create("SysQueryOpinion"))
+			//		}
+			//	}
+			//}
 		}
 	}
 	return router

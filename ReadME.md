@@ -114,7 +114,7 @@
 >   2.在线演示系统相比本地运行的版本收缩了修改、删除 数据的权限.  
 ![预览图](https://www.ginskeleton.com/images/home_page1.png)  
 
-### [在线演示系统: GinSkeleton-Admin](http://139.196.101.31:20202/)  
+### [在线演示系统: GinSkeleton-Admin](http://139.196.101.31:30000/)  
 ### [admin 后端仓库](https://gitee.com/daitougege/gin-skeleton-admin-backend)  
 ### [admin 前端仓库](https://gitee.com/daitougege/gin-skeleton-admin-frontend)  
 

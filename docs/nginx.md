@@ -8,7 +8,7 @@
 upstream  goskeleton_list {
     # 设置负载均衡模式为ip算法模式，这样不同的客户端每次请求都会与第一次建立对话的后端服务器进行交互
     ip_hash;
-    server  127.0.0.1:20202  ;
+    server  127.0.0.1:30000  ;
     server  127.0.0.1:20203  ;
 }
 server{
@@ -124,7 +124,7 @@ server {
 upstream  goskeleton_list {
     # 设置负载均衡模式为ip算法模式，这样不同的客户端每次请求都会与第一次建立对话的后端服务器进行交互
     ip_hash;
-    server  127.0.0.1:20202  ;
+    server  127.0.0.1:30000  ;
     server  127.0.0.1:20203  ;
 }
 // 这里主要是将 http 访问重定向到 https，这样就能同时支持 http 和 https 访问

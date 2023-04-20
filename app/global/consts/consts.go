@@ -19,8 +19,8 @@ const (
 	JwtTokenOK            int    = 200100  //token有效
 	JwtTokenInvalid       int    = -400100 //无效的token
 	JwtTokenInvalidMsg    string = "token 无效"
-	JwtTokenExpired       int    = -400101                 //过期的token
-	JwtTokenFormatErrCode int    = -400102                 //提交的 token 格式错误
+	JwtTokenExpired       int    = -400101          //过期的token
+	JwtTokenFormatErrCode int    = -400102          //提交的 token 格式错误
 	JwtTokenFormatErrMsg  string = "提交的 token 格式错误" //提交的 token 格式错误
 
 	JwtTokenInvalidTypeCode int    = -400100 //无效的token类型
@@ -73,18 +73,4 @@ const (
 	PhoneCodeExpiredMsg      string = "手机验证码过期"
 	PhoneCodeCheckFailedCode int    = -400402
 	PhoneCodeCheckFailedMsg  string = "手机验证码校验失败"
-
-	//手机验证码发送
-	SendCodeSuccessCode int    = 200
-	SendCodeSuccessMsg  string = "手机验证码发送成功"
-	SendCodeFailCode    int    = -400501
-	SendCodeFailMsg     string = "手机验证码发送失败"
-	SendCodeTooFreqCode int    = -400501
-	SendCodeTooFreqMsg  string = "获取验证码过于频繁"
-
-	//用户意见提交
-	SubmitOpinionSuccessCode int    = 200
-	SubmitOpinionSuccessMsg  string = "意见提交成功"
-	SubmitOpinionFailCode    int    = -400601
-	SubmitOpinionFailMsg     string = "意见提交失败"
 )

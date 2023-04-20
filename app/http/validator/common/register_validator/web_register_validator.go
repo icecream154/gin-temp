@@ -10,11 +10,7 @@ func WebRegisterValidator() {
 	//创建容器
 	containers := container.CreateContainersFactory()
 
-	// 发送与校验验证码
-	containers.Set("SysSendCode", common.SendCodeValidator{})
-	containers.Set("SysValidateCode", common.ValidateCodeValidator{})
+	containers.Set("AccountLogin", common.LoginValidator{})
+	containers.Set("AccountRegister", common.RegisterValidator{})
 
-	// 意见提交与查询
-	containers.Set("SysSubmitOpinion", common.SubmitOpinionValidator{})
-	containers.Set("SysQueryOpinion", common.QueryOpinionValidator{})
 }
