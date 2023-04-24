@@ -22,7 +22,7 @@ func (u *QAController) HandleInput(context *gin.Context) {
 	zLogger := logger.GetLogger(&req, requestContext)
 
 	apiCallStart := time.Now().Unix()
-	client := openai.NewClient("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")
+	client := openai.NewClient("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")
 
 	openAiChatMsgs := make([]openai.ChatCompletionMessage, len(submitInputReq.HistoryMsg)+1)
 	for i := 0; i < len(submitInputReq.HistoryMsg); i++ {
