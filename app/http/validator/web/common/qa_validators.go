@@ -22,6 +22,10 @@ func (l SubmitInputValidator) CheckParams(context *gin.Context) {
 		return
 	}
 
+	if submitInputReq.HistoryMsg == nil {
+		submitInputReq.HistoryMsg = make([]common.ChatMsg, 0)
+	}
+
 	extraAddBindDataContext := data_transfer.DataAddContext(&submitInputReq, context)
 	if extraAddBindDataContext == nil {
 		response.ErrorSystem(context, "参数绑定失败", "")

@@ -23,16 +23,24 @@ func (u *QAController) HandleInput(context *gin.Context) {
 
 	apiCallStart := time.Now().Unix()
 	client := openai.NewClient("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")
+
+	openAiChatMsgs := make([]openai.ChatCompletionMessage, len(submitInputReq.HistoryMsg)+1)
+	for i := 0; i < len(submitInputReq.HistoryMsg); i++ {
+		openAiChatMsgs[i] = openai.ChatCompletionMessage{
+			Role:    submitInputReq.HistoryMsg[i].Role,
+			Content: submitInputReq.HistoryMsg[i].Content,
+		}
+	}
+	openAiChatMsgs[len(submitInputReq.HistoryMsg)] = openai.ChatCompletionMessage{
+		Role:    openai.ChatMessageRoleUser,
+		Content: submitInputReq.Content,
+	}
+
 	resp, err := client.CreateChatCompletion(
 		ctx.Background(),
 		openai.ChatCompletionRequest{
-			Model: openai.GPT3Dot5Turbo,
-			Messages: []openai.ChatCompletionMessage{
-				{
-					Role:    openai.ChatMessageRoleUser,
-					Content: submitInputReq.Content,
-				},
-			},
+			Model:    openai.GPT3Dot5Turbo,
+			Messages: openAiChatMsgs,
 		},
 	)
 	apiCallEnd := time.Now().Unix()
