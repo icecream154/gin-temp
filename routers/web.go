@@ -39,33 +39,11 @@ func InitWebRouter() *gin.Engine {
 	}
 
 	//  创建一个后端接口路由组
-	backend := router.Group("/yi")
+	backend := router.Group("/my-app")
 	{
 		backend.Use(request_context.CheckRequestContext())
 		{
-			sysNoAuth := backend.Group("/common")
-			{
-				sysNoAuth.POST("/login", validatorFactory.Create("AccountLogin"))
-				sysNoAuth.POST("/register", validatorFactory.Create("AccountRegister"))
-			}
-
-			qaNoAuth := backend.Group("/qa")
-			{
-				qaNoAuth.POST("/submitInput", validatorFactory.Create("QASubmitInput"))
-			}
-
-			//backend.Use(authorization.CheckTokenAuth())
-			//{
-			//	// 通用接口
-			//	commonAuth := backend.Group("/common")
-			//	{
-			//		opinionAuth := commonAuth.Group("/opinion")
-			//		{
-			//			opinionAuth.POST("/submitOpinion", validatorFactory.Create("SysSubmitOpinion"))
-			//			opinionAuth.GET("/queryOpinion", validatorFactory.Create("SysQueryOpinion"))
-			//		}
-			//	}
-			//}
+			backend.GET("/pin", validatorFactory.Create("Pin"))
 		}
 	}
 	return router
