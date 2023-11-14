@@ -6,6 +6,7 @@ import (
 	"go.uber.org/zap"
 	"goskeleton/app/global/my_errors"
 	"goskeleton/app/global/variable"
+	"time"
 )
 
 const (
@@ -15,6 +16,11 @@ const (
 type RequestContext struct {
 	TraceId       string `header:"TraceId"`
 	Authorization string `header:"Authorization"`
+	StartUnixNano int64
+}
+
+func (requestContext RequestContext) GetMillCost() int64 {
+	return (time.Now().UnixNano() - requestContext.StartUnixNano) / (1000000)
 }
 
 func GetRequestContext(context *gin.Context) *RequestContext {
@@ -41,7 +47,7 @@ func CheckRequestContext() gin.HandlerFunc {
 			u1, _ := uuid.NewV4()
 			requestContext.TraceId = u1.String()
 		}
-
+		requestContext.StartUnixNano = time.Now().UnixNano()
 		context.Set(requestContextKey, requestContext)
 		context.Next()
 	}

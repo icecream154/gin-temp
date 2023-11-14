@@ -17,3 +17,7 @@ func (accClaims *AccClaims) IsAccClaimsValid() bool {
 	}
 	return true
 }
+
+func (u *AccClaims) IsAccClaimsInternal() bool {
+	return false
+}
